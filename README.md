@@ -3,7 +3,7 @@ Cluster based on 4xRPi
 
 ![Rpis in cluster](https://img.shields.io/badge/rpi%20count-4-green.svg)
 
-![Peak power usage](https://img.shields.io/badge/peak%20power%20usage-UNKNW%20W-red.svg)
+![Peak power usage](https://img.shields.io/badge/peak%20power%20usage-36%20W-green.svg)
 ![Compute power MIPS](https://img.shields.io/badge/compute%20power-UNKNW%20MIPS-red.svg)
 ![Compute power FLOPS](https://img.shields.io/badge/compute%20power-UNKNW%20FLOPS-red.svg)
 
