@@ -1,6 +1,6 @@
 #!/bin/bash
 
 zip -Zb system.zip $1 -v
-split -d -b64m system.zip system.zip
+split -d -b48m system.zip system.zip
 rm system.zip
 rm $1
