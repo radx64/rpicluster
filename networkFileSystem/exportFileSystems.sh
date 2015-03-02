@@ -1,8 +1,8 @@
-#---------------------------
+#---CONFIGURATION---
 nodesCount=4
 exportDirectory="/export/rpi/node"
 localDirectory="fs/node"
-#---------------------------
+#-------------------
 
 for node in `seq 1 $nodesCount`;
 do
@@ -19,6 +19,3 @@ do
 	echo $localdirname" to "$dirname
 	sudo mount --bind $localdirname $dirname
 done
-
-
-#sudo mount --bind fs/node /export/users
