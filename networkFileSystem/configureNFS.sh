@@ -34,9 +34,10 @@ do
 	echo $localdirname" to "$dirname
 	sudo mount --bind $localdirname $dirname
 
-	echo $exportDirectory$node" "$networkIp" (rw,nohide,insecure,no_subtree_check,async)" >> config
+	echo $exportDirectory$node" "$networkIp"(rw,nohide,insecure,no_subtree_check,async)" >> config
 done
 sudo mv config /etc/exports
+sudo service nfs-kernel-server restart
 }
 
 reconfigureNetwork
