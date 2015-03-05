@@ -12,8 +12,9 @@ function welcome {
 	echo -e "Configuration that will be applied:"
 	echo -e "\t Export directory prefix: \e[92m"$exportDirectory"\e[39m"
 	echo -e "\t Local directory prefix:  \e[92m"$localDirectory"\e[39m"
+	echo -e "\t Server interface:        \e[92m"$interface"\e[39m"
 	echo -e "\t Server IP:               \e[92m"$serverIp"\e[39m"
-	echo -e "\t NetworkIP:               \e[92m"$networkIp"\e[39m"
+	echo -e "\t Network IP:              \e[92m"$networkIp"\e[39m"
 
 	echo -e "\e[91mWarning!. Your actual /etc/exports configuration will be overwritten!"
 	echo -e "\e[39m"
