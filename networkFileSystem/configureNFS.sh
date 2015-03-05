@@ -7,6 +7,23 @@ serverIp="10.0.0.254/24"
 networkIp="10.0.0.0/24"
 #-------------------
 
+function welcome {
+	echo -e "========== \e[92mNFS shares configuration script \e[39m========="
+	echo -e "Configuration that will be applied:"
+	echo -e "\t Export directory prefix: \e[92m"$exportDirectory"\e[39m"
+	echo -e "\t Local directory prefix:  \e[92m"$localDirectory"\e[39m"
+	echo -e "\t Server IP:               \e[92m"$serverIp"\e[39m"
+	echo -e "\t NetworkIP:               \e[92m"$networkIp"\e[39m"
+
+	echo -e "\e[91mWarning!. Your actual /etc/exports configuration will be overwritten!"
+	echo -e "\e[39m"
+}
+
+function pause(){
+   read -p "$*"
+}
+
+
 function reconfigureNetwork {
 	echo "Shutting down iterface "$interface" ..."
 	sudo ip link set dev $interface down
@@ -40,5 +57,7 @@ sudo mv config /etc/exports
 sudo service nfs-kernel-server restart
 }
 
+welcome
+pause "Press [Enter] to continue configuration... [CTRL+C] to abort."
 reconfigureNetwork
 exportNFS
