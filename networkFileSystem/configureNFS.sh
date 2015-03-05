@@ -4,6 +4,7 @@ exportDirectory="/export/rpi/node"
 localDirectory="fs/node"
 interface="eth0"
 serverIp="10.0.0.254/24"
+networkIp="10.0.0.0/24"
 #-------------------
 
 function reconfigureNetwork {
@@ -16,6 +17,7 @@ function reconfigureNetwork {
 }
 
 function exportNFS {
+echo "" > config
 for node in `seq 1 $nodesCount`;
 do
 	dirname=$exportDirectory$node
@@ -25,12 +27,16 @@ do
 	else
 		echo "Creating export share: "$dirname
 		sudo mkdir -p $dirname
+		sudo chmod 777 $dirname
 	fi
 	echo "Binding local file system to export"
 	localdirname=$localDirectory$node
 	echo $localdirname" to "$dirname
 	sudo mount --bind $localdirname $dirname
+
+	echo $exportDirectory$node" "$networkIp" (rw,nohide,insecure,no_subtree_check,async)" >> config
 done
+sudo mv config /etc/exports
 }
 
 reconfigureNetwork
