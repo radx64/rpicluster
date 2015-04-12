@@ -38,6 +38,16 @@ function exportNFS {
 echo "" > config
 for node in `seq 1 $nodesCount`;
 do
+	localdirname=$localDirectory$node
+	if [ -e $localdirname ]
+	then
+		echo "Directory already exists "$localdirname
+	else
+		echo "Creating local filedir: "$localdirname
+		sudo mkdir -p $localdirname
+		sudo chmod 777 $localdirname
+	fi
+
 	dirname=$exportDirectory$node
 	if [ -e $dirname ]
 	then
@@ -48,11 +58,11 @@ do
 		sudo chmod 777 $dirname
 	fi
 	echo "Binding local file system to export"
-	localdirname=$localDirectory$node
+	
 	echo $localdirname" to "$dirname
 	sudo mount --bind $localdirname $dirname
 
-	echo $exportDirectory$node" "$networkIp"(rw,nohide,insecure,no_subtree_check,async)" >> config
+	echo $exportDirectory$node" "$networkIp"(rw,no_root_squash,no_subtree_check)" >> config
 done
 sudo mv config /etc/exports
 sudo service nfs-kernel-server restart

@@ -1,0 +1,1 @@
+dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/nfs nfsroot=10.0.0.254:/export/rpi/node1 ip=10.0.0.1 rootfstype=nfs elevator=deadline rootwait dwc_otg.microframe_schedule=1
