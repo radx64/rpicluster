@@ -3,8 +3,8 @@ nodesCount=4
 exportDirectory="/export/rpi/node"
 localDirectory="fs/node"
 interface="eth0"
-serverIp="10.0.0.254/24"
-networkIp="10.0.0.0/24"
+serverIp="192.168.0.254/24"
+networkIp="192.168.0.0/24"
 #-------------------
 
 function welcome {
@@ -35,7 +35,7 @@ function reconfigureNetwork {
 }
 
 function exportNFS {
-echo "" > config
+echo "/mirror *(rw,sync)" > config
 for node in `seq 1 $nodesCount`;
 do
 	localdirname=$localDirectory$node
