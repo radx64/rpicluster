@@ -7,7 +7,6 @@ Cluster based on 4xRPi
 ![Compute power MIPS](https://img.shields.io/badge/compute%20power-UNKNW%20MIPS-red.svg)
 ![Compute power FLOPS](https://img.shields.io/badge/compute%20power-UNKNW%20FLOPS-red.svg)
 
-
 Cluster will be based on four Rasperry Pi computers and network switch.
 
 ##### Things to do first:
@@ -18,8 +17,7 @@ Cluster will be based on four Rasperry Pi computers and network switch.
 - [x] Install and configure MPICH2
 - [ ] Run some distributed computing test.
 
-
 ##### Different aproach:
-- [ ] Find some HA software
-- [ ] Configure  it
-- [ ] Make some tests
+- [x] Find some HA software
+- [ ] [Ongoing] Configure  it
+- [ ] Make some tests (python script to poll mysql database)
