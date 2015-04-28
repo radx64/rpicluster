@@ -1,5 +1,6 @@
 # rpicluster
 Cluster based on 4xRPi
+[![Build Status](https://travis-ci.org/radx64/rpicluster.svg?branch=master)](https://travis-ci.org/radx64/rpicluster)
 
 ![Rpis in cluster](https://img.shields.io/badge/rpi%20count-4-green.svg)
 
