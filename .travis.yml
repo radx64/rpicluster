@@ -14,4 +14,5 @@ before_install:
 
 script: 
   - cd ./bench/integral/ && make run
+  - cd ../..
   - cd ./bench/primes/ && make run
