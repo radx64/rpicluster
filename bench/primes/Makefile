@@ -19,4 +19,4 @@ clean:
 	-rm -f $(EXECUTABLE)
 
 run: $(EXECUTABLE)
-	mpirun -np 4 $(EXECUTABLE)
+	mpirun -np 4 ./$(EXECUTABLE)
