@@ -5,8 +5,8 @@ float fct(float x)
 {
       return cos(x);
 }
-/* Prototype */
 float integral(float a, int n, float h);
+
 void main(argc,argv)
 int argc;
 char *argv[];
