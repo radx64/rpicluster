@@ -7,9 +7,7 @@ float fct(float x)
 }
 float integral(float a, int n, float h);
 
-void main(argc,argv)
-int argc;
-char *argv[];
+void main(int argc, char *argv)
 {
       int n, p, i, j, ierr,num;
       float h, result, a, b, pi;
@@ -19,13 +17,13 @@ char *argv[];
       MPI_Status status;
       float my_result;
 
-      pi = acos(-1.0);  /* = 3.14159... */
-      a = 0.;           /* lower limit of integration */
-      b = 16*pi*1./2.;     /* upper limit of integration */
-      n = 100000;          /* number of increment within each process */
+      pi = acos(-1.0);      /* = 3.14159... */
+      a = 0.;               /* lower limit of integration */
+      b = 16*pi*1./2.;      /* upper limit of integration */
+      n = 100000;           /* number of increment within each process */
 
-      dest = 0;         /* define the process that computes the final result */
-      tag = 123;        /* set the tag to identify this particular job */
+      dest = 0;             /* define the process that computes the final result */
+      tag = 123;            /* set the tag to identify this particular job */
 
 /* Starts MPI processes ... */
 

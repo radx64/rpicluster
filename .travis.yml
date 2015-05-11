@@ -16,3 +16,6 @@ script:
   - cd ./bench/integral/ && make run
   - cd ../..
   - cd ./bench/primes/ && make run
+  - cd ../..
+  - cd ./bench/arraySum/ && make run
+

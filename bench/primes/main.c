@@ -33,7 +33,7 @@ void manager(int numOfWorkers)
     int actualPackToSend = 0;
     int primes = 0;
     int worker;
-    printf("Starting process manager...\n");
+    printf("[M]-Starting process manager...\n");
     gettimeofday(&start, NULL);
 
     for(worker = 1; worker<=numOfWorkers; ++worker)
@@ -78,7 +78,7 @@ void manager(int numOfWorkers)
 
 void worker(int id)
 {
-    printf("Starting worker %d ...\n", id);
+    printf("[S]-Starting worker %d ...\n", id);
     int i, num;
     
     while(1)

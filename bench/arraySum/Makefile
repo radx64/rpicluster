@@ -1,9 +1,10 @@
 CC=mpicc
-CFLAGS=-c -Wall
+CFLAGS=-c
+DFLAGS?=INT
 LDFLAGS=-lm
 SOURCES=main.c
-OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=simpleMath
+OBJECTS=$(SOURCES:.c=.o)
+EXECUTABLE=arraySum
 
 .PHONY: all clean run
 
@@ -12,8 +13,8 @@ all: $(SOURCES) $(EXECUTABLE)
 $(EXECUTABLE): $(OBJECTS) 
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
 
-.cpp.o:
-	$(CC) $(CFLAGS) $< -o $@
+.c.o:
+	$(CC) $(CFLAGS) -D$(DFLAGS) $< -o $@
 
 clean:
 	-rm -f $(EXECUTABLE)
