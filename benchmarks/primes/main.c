@@ -27,7 +27,7 @@ void manager(int numOfWorkers)
 {
     struct timeval start, end;
     long secs_used, micros_used;
-    int limit = 1000000;
+    int limit = 100000;
     int numbersInPack = 5000;
     int numOfPacksToSend = limit / numbersInPack;
     int actualPackToSend = 0;
@@ -44,11 +44,12 @@ void manager(int numOfWorkers)
         int range[2];
         range[0] = lowerBound;
         range[1] = higherBound;
+        printf("Sending pack %d of %d\n", actualPackToSend,numOfPacksToSend);
         MPI_Send(range, 2, MPI_INT, worker, WORK, MPI_COMM_WORLD);
         actualPackToSend++;
     }
 
-    while(actualPackToSend < numOfPacksToSend)
+    while(actualPackToSend <= numOfPacksToSend)
     {
         int result;
         MPI_Status status;
@@ -61,8 +62,19 @@ void manager(int numOfWorkers)
         int range[2];
         range[0] = lowerBound;
         range[1] = higherBound;
+        printf("Sending pack %d of %d\n", actualPackToSend,numOfPacksToSend);
         MPI_Send(range, 2, MPI_INT, worker, WORK, MPI_COMM_WORLD);
         actualPackToSend++;
+    }
+
+    for(worker = 1; worker<=numOfWorkers; ++worker)
+    {
+        int result;
+        MPI_Status status;
+        MPI_Recv(&result, 1, MPI_INT, MPI_ANY_SOURCE, RESULT, MPI_COMM_WORLD, &status);
+        int worker = status.MPI_SOURCE;
+        //MPI_Recv(&result, 1, MPI_INT, worker, RESULT, MPI_COMM_WORLD, &status);
+        primes += result;   
     }
 
     for(worker = 1; worker<=numOfWorkers; ++worker)
@@ -86,7 +98,7 @@ void worker(int id)
         int primes = 0;
         MPI_Status status;
         int range[2];
-        MPI_Recv(range, 2, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
+        MPI_Recv(&range, 2, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
         int tag = status.MPI_TAG;
         if (tag == END) break;
 
@@ -103,6 +115,7 @@ void worker(int id)
             }
             if(i == num) primes++;
         }
+        printf("[%d]In range %d : %d got %d primes.\n",id, lowerBound, higherBound, primes);
 
         MPI_Send(&primes, 1, MPI_INT, 0, RESULT, MPI_COMM_WORLD);
     }
