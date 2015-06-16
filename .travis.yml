@@ -13,9 +13,9 @@ before_install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 
 script: 
-  - cd ./bench/integral/ && make run
+  - cd ./benchmarks/integral/ && make run
   - cd ../..
-  - cd ./bench/primes/ && make run
+  - cd ./benchmarks/primes/ && make run
   - cd ../..
-  - cd ./bench/arraySum/ && make run
+  - cd ./benchmarks/arraySum/ && make run
 
