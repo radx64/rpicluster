@@ -55,7 +55,6 @@ void manager(int numOfWorkers)
         MPI_Status status;
         MPI_Recv(&result, 1, MPI_INT, MPI_ANY_SOURCE, RESULT, MPI_COMM_WORLD, &status);
         int worker = status.MPI_SOURCE;
-        //MPI_Recv(&result, 1, MPI_INT, worker, RESULT, MPI_COMM_WORLD, &status);
         primes += result;
         int lowerBound = actualPackToSend * numbersInPack + 1;
         int higherBound = (actualPackToSend+1) * numbersInPack;
@@ -73,7 +72,6 @@ void manager(int numOfWorkers)
         MPI_Status status;
         MPI_Recv(&result, 1, MPI_INT, MPI_ANY_SOURCE, RESULT, MPI_COMM_WORLD, &status);
         int worker = status.MPI_SOURCE;
-        //MPI_Recv(&result, 1, MPI_INT, worker, RESULT, MPI_COMM_WORLD, &status);
         primes += result;   
     }
 

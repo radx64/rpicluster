@@ -66,11 +66,11 @@ void printMatrix(C_TYPE ***matrix, int width, int height)
 
 int main(int argc, char** argv)
 {
-	struct timeval start, end;
+	struct timeval start, sendend, end, recivstart;
 	long secsUsed, microsUsed;
 
 	int seed;
-	const int maxWidth = 5000;		// width of matrix 
+	const int maxWidth = 500;		// width of matrix 
 	const int maxHeight = maxWidth; 	// height of matrix 
 	C_TYPE **matrix;
 	C_TYPE **matrix2;
@@ -146,12 +146,21 @@ int main(int argc, char** argv)
 			}
 		}
 
+		gettimeofday(&sendend, NULL);
+
 		int resultsReceived = 0;
+
+		char receptionStarted = 0;
 
 		while(resultsReceived < processors)
 		{
 			MPI_Status status;
 			MPI_Recv(0, 0, MPI_TYPE, MPI_ANY_SOURCE, READYREQ, MPI_COMM_WORLD, &status);
+			if(receptionStarted == 0)
+			{
+				gettimeofday(&recivstart, NULL);
+				receptionStarted = 1;
+			}
 			int processor = status.MPI_SOURCE; 
 			printf("[M]-Received READYREQ from %d node...\n", processor);
 			int chunk;
@@ -167,6 +176,15 @@ int main(int argc, char** argv)
 		secsUsed=(end.tv_sec - start.tv_sec);
 	    microsUsed= ((secsUsed*1000000) + end.tv_usec) - (start.tv_usec);
 		printf("[M]-Time: %lf [seconds]\n", microsUsed/1000000.0);
+
+		long sendTimeSecs = (sendend.tv_sec - start.tv_sec);
+		long sendTime = ((sendTimeSecs*1000000) + sendend.tv_usec) - (start.tv_usec);
+		printf("[M]-SendTime: %lf [seconds]\n", sendTime/1000000.0);
+
+		long recvTimeSecs = (end.tv_sec - recivstart.tv_sec);
+		long recvTime = ((sendTimeSecs*1000000) + end.tv_usec) - (recivstart.tv_usec);
+		printf("[M]-RecivTime: %lf [seconds]\n", recvTime/1000000.0);
+
 		deallocateMemory(&matrix,maxHeight);
 		deallocateMemory(&matrix2,maxHeight);
 		deallocateMemory(&sum,maxHeight);
